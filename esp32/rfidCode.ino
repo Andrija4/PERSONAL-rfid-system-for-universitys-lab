@@ -10,8 +10,8 @@
 #define LED_RED 4
 //#define BUZZER 15
 
-const char* ssid = "raflab";
-const char* password = "rafpassword";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASSWORD";
 const char* apiUrl = "http://192.168.1.XXX:8000/functions/v1/rfid-api/check"; //Change to your PC's local IP
 
 MFRC522 rfid(SS_PIN, RST_PIN);
