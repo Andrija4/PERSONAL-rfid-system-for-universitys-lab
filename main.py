@@ -50,6 +50,7 @@ class RFIDCheckRequest(BaseModel):
 @app.post("/functions/v1/rfid-api/check")
 async def check_rfid(payload: RFIDCheckRequest):
     rfid = payload.rfid_number.upper().strip()
+
     with Session(engine) as db:
         card = db.query(Card).filter(
             Card.rfid_number == rfid,
@@ -57,19 +58,23 @@ async def check_rfid(payload: RFIDCheckRequest):
         ).first()
 
         access_granted = card is not None
+        user_name = card.name if card else None
+
         log = ScanLog(
-            rfid_number = rfid,
-            user_name   = card.name if card else None,
-            access      = access_granted,
+            rfid_number=rfid,
+            user_name=user_name,
+            access=access_granted,
         )
+
         db.add(log)
         db.commit()
 
     if access_granted:
         return {
             "access_granted": True,
-            "user": {"name": card.name}
+            "user": {"name": user_name}
         }
+
     return {"access_granted": False}
 
 
