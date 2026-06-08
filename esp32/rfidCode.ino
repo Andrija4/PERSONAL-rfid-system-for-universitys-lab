@@ -8,11 +8,11 @@
 #define RST_PIN 22
 #define LED_GREEN 2
 #define LED_RED 4
-//#define BUZZER 15
+#define LOCKER 15
 
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
-const char* apiUrl = "http://192.168.1.XXX:8000/functions/v1/rfid-api/check"; //Change to your PC's local IP
+const char* ssid = "SSID_NAME";
+const char* password = "PASSWORD";
+const char* apiUrl = "http://ip_address/functions/v1/rfid-api/check"; //Change to your PC's local IP
 
 MFRC522 rfid(SS_PIN, RST_PIN);
 
@@ -21,7 +21,7 @@ void setup() {
 
   pinMode(LED_GREEN, OUTPUT);
   pinMode(LED_RED, OUTPUT);
-  //pinMode(BUZZER, OUTPUT);
+  pinMode(LOCKER, OUTPUT);
 
   SPI.begin();
   rfid.PCD_Init();
@@ -87,9 +87,9 @@ void checkRFIDAccess(String rfidNumber) {
 
           digitalWrite(LED_GREEN, HIGH);
           digitalWrite(LED_RED, LOW);
-          //digitalWrite(BUZZER, HIGH);
+          digitalWrite(LOCKER, HIGH);
           delay(3000);
-          //digitalWrite(BUZZER, LOW);
+          digitalWrite(LOCKER, LOW);
           digitalWrite(LED_GREEN, LOW);
 
         } else {
@@ -97,9 +97,7 @@ void checkRFIDAccess(String rfidNumber) {
 
           digitalWrite(LED_RED, HIGH);
           digitalWrite(LED_GREEN, LOW);
-          //digitalWrite(BUZZER, HIGH);
           delay(1000);
-          //digitalWrite(BUZZER, LOW);
           digitalWrite(LED_RED, LOW);
         }
       }
