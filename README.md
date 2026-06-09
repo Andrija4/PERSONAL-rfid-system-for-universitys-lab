@@ -68,6 +68,10 @@ existing ESP32 code expects:
 { "access_granted": false }
 ```
 
+## Circuit Scheme
+
+<img width="3000" height="1961" alt="circuit_image" src="https://github.com/user-attachments/assets/bdb417d8-49b0-46b5-90d0-d6c1bbf72823" />
+
 ## Features
 
 - ✅ Add / remove RFID cards via web UI
